@@ -4,22 +4,111 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Privacy Policy — Racked</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 760px; margin: 0 auto; padding: 48px 24px 96px; line-height: 1.6; color: #1c1c1e; background: #fff; }
-  h1 { font-size: 1.75rem; margin-bottom: 0.25rem; }
-  h2 { font-size: 1.2rem; margin-top: 2.2rem; border-bottom: 1px solid #e5e5e5; padding-bottom: 0.4rem; }
-  .meta { color: #666; font-size: 0.9rem; margin-bottom: 2rem; }
-  a { color: #E85D26; }
-  footer { margin-top: 3rem; font-size: 0.85rem; color: #888; border-top: 1px solid #e5e5e5; padding-top: 1.5rem; }
-  .fill { background: #fff3e0; padding: 0 3px; border-radius: 3px; }
+  :root {
+    --raw-iron: #1C1C1E;
+    --chalk-white: #F5F4F0;
+    --pr-orange: #E85D26;
+    --chalk-dust: #8A8A8E;
+    --plate-grey: #2C2C2E;
+    --plate: #3A3A3C;
+    --border: rgba(245,244,240,0.08);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--raw-iron);
+    color: var(--chalk-white);
+  }
+  .top {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 56px 24px 0;
+  }
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--chalk-dust);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 28px;
+  }
+  .back:hover { color: var(--pr-orange); }
+  h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 2.6rem;
+    letter-spacing: 0.01em;
+    margin: 0 0 8px;
+    line-height: 1.05;
+  }
+  .rule { width: 40px; height: 3px; background: var(--pr-orange); border-radius: 2px; margin: 16px 0 20px; }
+  .meta { color: var(--chalk-dust); font-size: 0.88rem; margin-bottom: 8px; }
+  .meta .fill { color: var(--chalk-white); }
+  main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 8px 24px 100px;
+    line-height: 1.7;
+  }
+  h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.4rem;
+    letter-spacing: 0.01em;
+    margin-top: 2.6rem;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    color: var(--chalk-white);
+  }
+  h3 {
+    font-size: 1.02rem;
+    color: var(--pr-orange);
+    margin-top: 1.8rem;
+    font-weight: 600;
+  }
+  p, li { color: var(--chalk-white); font-size: 0.98rem; }
+  ul { padding-left: 1.3rem; }
+  li { margin-bottom: 0.5rem; }
+  li::marker { color: var(--pr-orange); }
+  strong { color: var(--chalk-white); font-weight: 600; }
+  a { color: var(--pr-orange); }
+  .fill {
+    background: rgba(232,93,38,0.14);
+    color: var(--chalk-white);
+    padding: 1px 6px;
+    border-radius: 5px;
+    font-weight: 500;
+  }
+  footer {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px 64px;
+    font-size: 0.85rem;
+    color: var(--chalk-dust);
+    border-top: 1px solid var(--border);
+    padding-top: 1.6rem;
+    margin-top: 1rem;
+  }
 </style>
 </head>
 <body>
 
-<h1>Privacy Policy — Racked</h1>
-<p class="meta"><strong>Effective date:</strong> <span class="fill">July 7, 2026</span><br>
-<strong>Last updated:</strong> <span class="fill">July 7, 2026</span></p>
+<div class="top">
+  <a class="back" href="../index.html">← Racked</a>
+  <h1>Privacy Policy</h1>
+  <div class="rule"></div>
+  <p class="meta"><strong>Effective date:</strong> <span class="fill">July 7, 2026</span></p>
+  <p class="meta"><strong>Last updated:</strong> <span class="fill">July 7, 2026</span></p>
+</div>
 
+<main>
 <p>Racked ("we," "us," "our") operates the Racked mobile application (the "App"), a marketplace for buying and selling used powerlifting and strength-training equipment. This Privacy Policy explains what information we collect, how we use it, and the choices you have.</p>
 
 <p>By using Racked, you agree to the collection and use of information as described in this policy.</p>
@@ -98,6 +187,7 @@
 <h2>11. Contact Us</h2>
 <p>If you have questions about this Privacy Policy or how we handle your data, contact us at:</p>
 <p><strong><span class="fill">support@rackedapp.com.de</span></strong></p>
+</main>
 
 <footer>
   This document was drafted to reflect Racked's actual current data practices as implemented in the app, but is not a substitute for review by a qualified attorney familiar with applicable privacy law (e.g. GDPR if serving EU/EEA users, CCPA if serving California residents) before public release.
