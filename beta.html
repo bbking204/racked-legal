@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Join the Racked Beta</title>
+<meta name="description" content="Be one of the first to try Racked — the marketplace for used powerlifting and weightlifting gear.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --raw-iron: #1C1C1E;
+    --chalk-white: #F5F4F0;
+    --pr-orange: #E85D26;
+    --chalk-dust: #8A8A8E;
+    --plate-grey: #2C2C2E;
+    --plate: #3A3A3C;
+    --border: rgba(245,244,240,0.08);
+    --lift-green: #2ECC71;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--raw-iron);
+    background-image: radial-gradient(circle at 50% -10%, rgba(232,93,38,0.16), transparent 55%);
+    color: var(--chalk-white);
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px 56px;
+  }
+  .wrap { max-width: 440px; width: 100%; }
+  header { text-align: center; margin-bottom: 34px; }
+  .mark {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 3rem;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    margin: 0;
+  }
+  .rule { width: 44px; height: 3px; background: var(--pr-orange); border-radius: 2px; margin: 16px auto 20px; }
+  h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.9rem;
+    line-height: 1.15;
+    margin: 0 0 10px;
+  }
+  .sub {
+    color: var(--chalk-dust);
+    font-size: 0.98rem;
+    line-height: 1.55;
+    margin: 0;
+  }
+  form {
+    margin-top: 30px;
+    background: var(--plate-grey);
+    border: 1.5px solid var(--border);
+    border-radius: 18px;
+    padding: 26px 22px;
+  }
+  .field { margin-bottom: 18px; }
+  .field:last-of-type { margin-bottom: 0; }
+  label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--chalk-dust);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+  input[type="text"], input[type="email"] {
+    width: 100%;
+    background: var(--plate);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    color: var(--chalk-white);
+    outline: none;
+    transition: border-color 0.15s ease;
+  }
+  input::placeholder { color: var(--chalk-dust); }
+  input:focus { border-color: var(--pr-orange); }
+  .roles {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+  }
+  .role-btn {
+    position: relative;
+    text-align: center;
+    padding: 12px 6px;
+    border-radius: 12px;
+    border: 1.5px solid var(--border);
+    background: var(--plate);
+    color: var(--chalk-dust);
+    font-size: 0.86rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+  }
+  .role-btn input { position: absolute; opacity: 0; pointer-events: none; }
+  .role-btn.active {
+    border-color: var(--pr-orange);
+    background: rgba(232,93,38,0.14);
+    color: var(--chalk-white);
+  }
+  .honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .submit-btn {
+    width: 100%;
+    margin-top: 24px;
+    padding: 15px;
+    border: none;
+    border-radius: 999px;
+    background: var(--pr-orange);
+    color: var(--chalk-white);
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.12s ease, opacity 0.15s ease;
+  }
+  .submit-btn:active { transform: scale(0.98); }
+  .submit-btn:disabled { opacity: 0.55; cursor: default; }
+  .error-msg {
+    display: none;
+    margin: 14px 0 0;
+    font-size: 0.86rem;
+    color: #FF6B6B;
+    text-align: center;
+  }
+  .error-msg.show { display: block; }
+  .success {
+    display: none;
+    text-align: center;
+    padding: 46px 22px;
+    background: var(--plate-grey);
+    border: 1.5px solid var(--border);
+    border-radius: 18px;
+    margin-top: 30px;
+  }
+  .success.show { display: block; }
+  .success .check {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(46,204,113,0.14);
+    color: var(--lift-green);
+    font-size: 1.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 18px;
+  }
+  .success h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin: 0 0 10px;
+  }
+  .success p { color: var(--chalk-dust); font-size: 0.95rem; line-height: 1.55; margin: 0; }
+  form.hide { display: none; }
+  footer { text-align: center; margin-top: 30px; }
+  footer p { color: var(--chalk-dust); font-size: 0.8rem; margin: 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="mark">RACKED</p>
+    <div class="rule"></div>
+    <h1>Join the beta</h1>
+    <p class="sub">Used lifting gear. Real prices. Get early access before we open Racked up to everyone.</p>
+  </header>
+
+  <form id="beta-form" novalidate>
+    <div class="field">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" placeholder="Your name" autocomplete="name" required maxlength="100">
+    </div>
+    <div class="field">
+      <label for="city">City</label>
+      <input type="text" id="city" name="city" placeholder="Where are you based?" autocomplete="address-level2" required maxlength="100">
+    </div>
+    <div class="field">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" required maxlength="200">
+    </div>
+    <div class="field">
+      <label>I'm mostly interested in</label>
+      <div class="roles" role="radiogroup">
+        <label class="role-btn" data-role="buying">
+          <input type="radio" name="role" value="buying">Buying
+        </label>
+        <label class="role-btn" data-role="selling">
+          <input type="radio" name="role" value="selling">Selling
+        </label>
+        <label class="role-btn" data-role="both">
+          <input type="radio" name="role" value="both">Both
+        </label>
+      </div>
+    </div>
+    <div class="honeypot" aria-hidden="true">
+      <label for="website">Website</label>
+      <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+    </div>
+
+    <button type="submit" class="submit-btn" id="submit-btn">Request access</button>
+    <p class="error-msg" id="error-msg"></p>
+  </form>
+
+  <div class="success" id="success">
+    <div class="check">✓</div>
+    <h2>You're on the list</h2>
+    <p>Thanks — we'll reach out by email if you're picked for the beta.</p>
+  </div>
+
+  <footer>
+    <p>© 2026 Racked</p>
+  </footer>
+</div>
+
+<script>
+  const FUNCTION_URL = 'https://waxaheonsbmsekxwulou.supabase.co/functions/v1/beta-signup';
+
+  const form = document.getElementById('beta-form');
+  const errorEl = document.getElementById('error-msg');
+  const submitBtn = document.getElementById('submit-btn');
+  const successEl = document.getElementById('success');
+
+  document.querySelectorAll('.role-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.role-btn').forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+
+  function showError(msg) {
+    errorEl.textContent = msg;
+    errorEl.classList.add('show');
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errorEl.classList.remove('show');
+
+    const name = document.getElementById('name').value.trim();
+    const city = document.getElementById('city').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const role = form.querySelector('input[name="role"]:checked')?.value;
+    const website = document.getElementById('website').value;
+
+    if (!name || !city || !email) {
+      showError('Please fill in your name, city, and email.');
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showError('That email doesn’t look right.');
+      return;
+    }
+    if (!role) {
+      showError('Pick buying, selling, or both.');
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
+    try {
+      const res = await fetch(FUNCTION_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, city, email, role, website }),
+      });
+      if (!res.ok) throw new Error('request failed');
+
+      form.classList.add('hide');
+      successEl.classList.add('show');
+    } catch (err) {
+      showError('Something went wrong. Please try again in a moment.');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Request access';
+    }
+  });
+</script>
+</body>
+</html>
