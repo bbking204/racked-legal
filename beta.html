@@ -121,6 +121,11 @@
     grid-template-columns: 1fr 1fr 1fr;
     gap: 8px;
   }
+  .devices {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
   .role-btn {
     position: relative;
     text-align: center;
@@ -273,6 +278,17 @@
         </label>
       </div>
     </div>
+    <div class="field">
+      <label>איזה מכשיר יש לכם</label>
+      <div class="devices" role="radiogroup">
+        <label class="role-btn" data-device="android">
+          <input type="radio" name="device" value="android">Android
+        </label>
+        <label class="role-btn" data-device="ios">
+          <input type="radio" name="device" value="ios">iPhone
+        </label>
+      </div>
+    </div>
     <div class="honeypot" aria-hidden="true">
       <label for="website">Website</label>
       <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
@@ -301,11 +317,13 @@
   const submitBtn = document.getElementById('submit-btn');
   const successEl = document.getElementById('success');
 
-  document.querySelectorAll('.role-btn').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.role-btn').forEach((b) => b.classList.remove('active'));
-      btn.classList.add('active', 'pop');
-      btn.addEventListener('animationend', () => btn.classList.remove('pop'), { once: true });
+  document.querySelectorAll('[role="radiogroup"]').forEach((group) => {
+    group.querySelectorAll('.role-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        group.querySelectorAll('.role-btn').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active', 'pop');
+        btn.addEventListener('animationend', () => btn.classList.remove('pop'), { once: true });
+      });
     });
   });
 
@@ -325,6 +343,7 @@
     const city = document.getElementById('city').value.trim();
     const email = document.getElementById('email').value.trim();
     const role = form.querySelector('input[name="role"]:checked')?.value;
+    const device = form.querySelector('input[name="device"]:checked')?.value;
     const website = document.getElementById('website').value;
 
     if (!name || !city || !email) {
@@ -339,6 +358,10 @@
       showError('בחרו האם אתם קונים, מוכרים, או שניהם.');
       return;
     }
+    if (!device) {
+      showError('בחרו איזה מכשיר יש לכם.');
+      return;
+    }
 
     submitBtn.disabled = true;
     submitBtn.textContent = 'שולח…';
@@ -347,7 +370,7 @@
       const res = await fetch(FUNCTION_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, city, email, role, website }),
+        body: JSON.stringify({ name, city, email, role, device, website }),
       });
       if (!res.ok) throw new Error('request failed');
 
