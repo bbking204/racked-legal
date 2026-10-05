@@ -4,15 +4,37 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Racked</title>
+<meta name="description" content="Buy and sell used gym gear for real prices." />
+<meta property="og:title" content="Racked" />
+<meta property="og:description" content="Buy and sell used gym gear for real prices." />
+<meta property="og:image" content="https://bbking204.github.io/racked-legal/og-icon.png" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Racked" />
+<meta name="twitter:description" content="Buy and sell used gym gear for real prices." />
+<meta name="twitter:image" content="https://bbking204.github.io/racked-legal/og-icon.png" />
 <style>
   :root { color-scheme: dark; }
   * { box-sizing: border-box; }
-  body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; background: #17171A; color: #F5F5F0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 24px; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #17171A;
+    color: #F5F5F0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    padding: 24px;
+  }
   .card { max-width: 360px; width: 100%; text-align: center; }
   .logo { font-weight: 800; font-size: 28px; letter-spacing: -0.5px; margin-bottom: 24px; }
   h1 { font-size: 19px; font-weight: 600; margin: 0 0 8px; }
   p { font-size: 15px; color: #9B9B9F; line-height: 1.5; margin: 0 0 28px; }
-  a.btn { display: block; text-decoration: none; background: #E85D26; color: #fff; font-weight: 700; font-size: 16px; padding: 14px 20px; border-radius: 999px; margin-bottom: 12px; }
+  a.btn {
+    display: block; text-decoration: none; background: #E85D26; color: #fff;
+    font-weight: 700; font-size: 16px; padding: 14px 20px; border-radius: 999px; margin-bottom: 12px;
+  }
   a.btn.secondary { background: transparent; border: 1.5px solid #3A3A3E; color: #F5F5F0; }
   noscript { display: block; margin-top: 20px; color: #9B9B9F; font-size: 14px; }
 </style>
@@ -20,24 +42,31 @@
 <body>
   <div class="card">
     <div class="logo">RACKED</div>
-    <h1 id="title">Opening listing...</h1>
+    <h1 id="title">Opening listing…</h1>
     <p id="subtitle">If nothing happens, get the app below.</p>
     <a class="btn" id="open-app-btn" href="#">Open in Racked</a>
     <a class="btn secondary" id="get-app-btn" href="#">Get the app</a>
   </div>
-  <noscript>Enable JavaScript, or use the buttons above to get the Racked app.</noscript>
+  <noscript>Use the buttons above to get the Racked app.</noscript>
   <script>
-    var ANDROID = 'https://github.com/bbking204/Racked-App/releases/latest';
-    var IOS = 'https://testflight.apple.com/join/DbEfuchA';
-    var id = new URLSearchParams(location.search).get('id');
-    var appUrl = id ? 'racked://listing/' + encodeURIComponent(id) : 'racked://';
+    var ANDROID_DOWNLOAD_URL = 'https://github.com/bbking204/Racked-App/releases/latest';
+    var IOS_DOWNLOAD_URL = 'https://testflight.apple.com/join/DbEfuchA';
+
+    var params = new URLSearchParams(window.location.search);
+    var listingId = params.get('id');
+    var appUrl = listingId ? 'racked://listing/' + encodeURIComponent(listingId) : 'racked://';
+
     document.getElementById('open-app-btn').href = appUrl;
-    var isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-    document.getElementById('get-app-btn').href = isIOS ? IOS : ANDROID;
-    var t0 = Date.now();
-    location.href = appUrl;
-    setTimeout(function() {
-      if (document.visibilityState === 'visible' && Date.now() - t0 >= 1200) {
+
+    var ua = navigator.userAgent || '';
+    var isIOS = /iPhone|iPad|iPod/i.test(ua);
+    var storeUrl = isIOS ? IOS_DOWNLOAD_URL : ANDROID_DOWNLOAD_URL;
+    document.getElementById('get-app-btn').href = storeUrl;
+
+    var openedAt = Date.now();
+    window.location.href = appUrl;
+    setTimeout(function () {
+      if (document.visibilityState === 'visible' && Date.now() - openedAt >= 1200) {
         document.getElementById('title').textContent = "Don't have Racked yet?";
         document.getElementById('subtitle').textContent = 'Get the app to view this listing.';
       }
