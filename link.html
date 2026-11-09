@@ -57,11 +57,13 @@
     var itemId = params.get('id');
     var type = params.get('type') === 'wanted' ? 'wanted' : 'listing';
     var isWanted = type === 'wanted';
-    var appUrl = itemId ? 'racked://' + type + '/' + encodeURIComponent(itemId) : 'racked://';
-    var webItemUrl = itemId ? WEB_APP_URL + '/' + type + '/' + encodeURIComponent(itemId) : WEB_APP_URL + '/';
+    var ref = (params.get('ref') || '').replace(/[^A-Za-z0-9]/g, '').slice(0, 12).toUpperCase();
+    var refQuery = ref ? '?ref=' + ref : '';
+    var appUrl = (itemId ? 'racked://' + type + '/' + encodeURIComponent(itemId) : 'racked://') + refQuery;
+    var webItemUrl = (itemId ? WEB_APP_URL + '/' + type + '/' + encodeURIComponent(itemId) : WEB_APP_URL + '/') + refQuery;
 
     document.getElementById('open-app-btn').href = appUrl;
-    document.getElementById('title').textContent = isWanted ? 'פותחים את הבקשה…' : 'פותחים את המודעה…';
+    document.getElementById('title').textContent = itemId ? (isWanted ? 'פותחים את הבקשה…' : 'פותחים את המודעה…') : 'פותחים את Racked…';
 
     var ua = navigator.userAgent || '';
     var isIOS = /iPhone|iPad|iPod/i.test(ua);
@@ -75,14 +77,14 @@
       setTimeout(function () {
         if (document.visibilityState === 'visible' && Date.now() - openedAt >= 1200) {
           document.getElementById('title').textContent = 'עוד אין לכם Racked?';
-          document.getElementById('subtitle').textContent = isWanted
-            ? 'הורידו את האפליקציה כדי לראות את הבקשה.'
-            : 'הורידו את האפליקציה כדי לראות את המודעה.';
+          document.getElementById('subtitle').textContent = (itemId
+            ? (isWanted ? 'הורידו את האפליקציה כדי לראות את הבקשה.' : 'הורידו את האפליקציה כדי לראות את המודעה.')
+            : 'הורידו את האפליקציה כדי להצטרף.') + (ref ? ' בהרשמה הזינו את קוד ההזמנה: ' + ref : '');
         }
       }, 1500);
     } else {
       mainBtn.href = webItemUrl;
-      mainBtn.textContent = isWanted ? 'צפו בבקשה ב-Racked' : 'צפו במודעה ב-Racked';
+      mainBtn.textContent = !itemId ? 'המשיכו ל-Racked' : (isWanted ? 'צפו בבקשה ב-Racked' : 'צפו במודעה ב-Racked');
       window.location.replace(webItemUrl);
     }
   </script>
